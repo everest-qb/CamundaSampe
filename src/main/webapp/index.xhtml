@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>測試頁</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<p:themeSwitcher value="#{themeBean.theme}">
+				<f:selectItems value="#{themeBean.themes}" />
+				<p:ajax listener="#{themeBean.changeTheme()}" />
+			</p:themeSwitcher>
+			<p:panel header="#{gmsg['test']}">
+				<f:facet name="footer">
+					<h:outputText value="Footer Text" />
+				</f:facet>
+
+ABC
+			</p:panel>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

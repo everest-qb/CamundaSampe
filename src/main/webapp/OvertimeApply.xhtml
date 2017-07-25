@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
+	</f:metadata>
+
+	<h:head>
+		<title>延長工時申請</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<p:panelGrid columns="2">
+				<p:outputLabel for="overtimeType" value="申請類別"></p:outputLabel>
+				<p:selectOneMenu id="overtimeType"
+					value="#{processVariables['overtimeType']}" required="true">
+					<f:selectItem itemLabel="正常上班日" itemValue="NORMAL" />
+					<f:selectItem itemLabel="休息日、國定假日" itemValue="HOLIDAY" />
+					<f:selectItem itemLabel="例假日" itemValue="OFFICAL_HOLIDAY" />
+				</p:selectOneMenu>
+				<p:outputLabel for="applyer" value="申請人"></p:outputLabel>
+				<p:inputText id="applyer" value="#{processVariables['applyer']}"></p:inputText>
+
+				<p:outputLabel for="beginTime" value="起始時間"></p:outputLabel>
+				<p:calendar id="beginTime" value="#{processVariables['beginTime']}"
+					pattern="MM/dd HH:mm"></p:calendar>
+				<p:outputLabel for="endTime" value="結束時間"></p:outputLabel>
+				<p:calendar id="endTime" value="#{processVariables['endTime']}"
+					pattern="MM/dd HH:mm"></p:calendar>
+				<p:row>
+					<p:column colspan="2" >
+						<p:commandButton id="submit_button" value="申請"
+							action="#{camundaTaskForm.completeProcessInstanceForm()}" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:messages style="color:red;margin:8px;" />
+		</h:form>
+	</h:body>
+</f:view>
+</html>

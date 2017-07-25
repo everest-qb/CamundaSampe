@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
+	</f:metadata>
+
+	<h:head>
+		<title>Email申請</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<p:panelGrid columns="2">
+				<p:outputLabel for="applyer" value="申請人"></p:outputLabel>
+				<p:selectOneMenu id="applyer" value="#{processVariables['applyer']}" required="true">
+								<f:selectItem itemLabel="A申請人" itemValue="Y045" />
+								<f:selectItem itemLabel="B申請人" itemValue="Y405" />
+				</p:selectOneMenu>
+			
+				<p:outputLabel for="overtimeType" value="申請類別"></p:outputLabel>
+				<p:selectOneMenu id="overtimeType"
+					value="#{processVariables['applyType']}" required="true">
+					<f:selectItem itemLabel="帳號" itemValue="ACCOUNT" />
+					<f:selectItem itemLabel="Auto-Copy" itemValue="OTHER1" />
+					<f:selectItem itemLabel="Mail檢視" itemValue="OTHER2" />
+					<f:selectItem itemLabel="歷史Mail檢視" itemValue="OTHER3" />
+					<f:selectItem itemLabel="E-mail Forword" itemValue="OTHER4" />
+					<p:ajax event="change" update="@form" process="@form" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="overtimeType1" value="帳號類別" ></p:outputLabel>
+				<p:selectOneMenu id="overtimeType1" disabled="#{processVariables['applyType'].startsWith('OTHER')}"
+								value="#{processVariables['accountType']}" required="true">
+								<f:selectItem itemLabel="對內" itemValue="IN" />
+								<f:selectItem itemLabel="對外" itemValue="OUT" />
+				</p:selectOneMenu>
+
+
+
+				<p:row>
+					<p:column colspan="2" >
+						<p:commandButton id="submit_button" value="申請"
+							action="#{camundaTaskForm.completeProcessInstanceForm()}" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:messages style="color:red;margin:8px;" />
+		</h:form>
+	</h:body>
+</f:view>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
+	</f:metadata>
+
+	<h:head>
+		<title>教育經費申請</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<p:panelGrid columns="2">
+				<p:outputLabel for="noId" value="單號"></p:outputLabel>
+				<p:inputMask id="noId" mask="SWF9999-99-99-999" value="#{processVariables['hrdNo']}" required="true"></p:inputMask>	
+				
+				<p:outputLabel for="applyer" value="申請人"></p:outputLabel>
+				<p:selectOneMenu id="applyer" value="#{processVariables['applyer']}" required="true">
+								<f:selectItem itemLabel="QB" itemValue="Y405" />
+								<f:selectItem itemLabel="Andy" itemValue="V410" />
+								<f:selectItem itemLabel="蔡佳洵" itemValue="U655" />
+				</p:selectOneMenu>
+			
+				<p:outputLabel for="total" value="總金額"></p:outputLabel>
+				<p:spinner prefix="NT " id="total" value="#{processVariables['tatalMoney']}"
+				 required="true" requiredMessage="請輸入金額" min="1" max="1000000"></p:spinner>
+
+				<p:outputLabel for="textId" value="事由"></p:outputLabel>
+				<p:inputTextarea id="textId" value="#{processVariables['textarea_1']}" required="true">
+				
+				</p:inputTextarea>
+
+				<p:row>
+					<p:column colspan="2" >
+						<p:commandButton id="submit_button" value="申請"
+							action="#{camundaTaskForm.completeProcessInstanceForm()}" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:messages style="color:red;margin:8px;" />
+		</h:form>
+	</h:body>
+</f:view>
+</html>
